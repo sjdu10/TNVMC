@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --time=00:10:00
+#SBATCH --ntasks-per-node=1
+#SBATCH -c 1
+#SBATCH --mail-user=sdu2@caltech.edu   # email address
+
+# Notify at the beginning, end of job and on failure.
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-type=END
+#SBATCH --mail-type=FAIL
+
+## /SBATCH -p general # partition (queue)
+## /SBATCH -o slurm.%N.%j.out # STDOUT
+## /SBATCH -e slurm.%N.%j.err # STDERR
+
+date
+module purge
+cd $4
+python get_su_state.py $1 $2 $3
+date
